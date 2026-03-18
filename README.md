@@ -1,93 +1,128 @@
-EnRoute Delivery – Smart Last-Mile Optimization
-Overview
+# 📦 EnRoute Delivery System - Smart Last-Mile Optimization
 
-EnRoute Delivery is an innovative delivery model designed to optimize last-mile logistics by allowing customers to pick up orders from chokepoints along their daily routes instead of doorstep delivery. This reduces delivery miles, fuel consumption, and emissions while improving delivery efficiency and scalability for retailers.
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-The project is integrated into a Walmart frontend clone and provides an end-to-end experience: from order checkout → location input → chokepoint detection → slot assignment → order confirmation.
+## 📖 Overview
 
-Features
+**EnRoute Delivery** is an innovative delivery model and full-stack web application designed to optimize last-mile logistics. Instead of traditional doorstep delivery, EnRoute allows customers to pick up their orders from "chokepoints" along their daily commuting routes. 
 
-Address & Location Input
+This approach significantly reduces delivery miles, fuel consumption, and carbon emissions while improving delivery efficiency and scalability for retailers. The project integrates a modern e-commerce shopping experience with an interactive, geo-aware delivery map.
 
-Manual input, auto-detect (geolocation), or map pin drop.
+---
 
-Zone Detection
+## ✨ Features
 
-User’s location is mapped to predefined delivery zones.
+- **🛍️ E-Commerce Storefront:** A fully functional product catalog, cart management, and checkout process.
+- **📍 Smart Location Input:** Manual address entry or automatic geolocation to map users to predefined delivery zones.
+- **🗺️ Chokepoint Selection:** An interactive map (powered by Leaflet) displaying nearby pickup points with color-coded traffic congestion indicators.
+- **⏱️ Slot Assignment & Load Balancing:** Backend logic to assign pickup time slots while balancing crowd loads across different chokepoints.
+- **🎨 Modern UI/UX:** Glassmorphism design patterns, responsive layouts, and smooth animations using Tailwind CSS and Radix UI.
 
-Chokepoint Selection
+---
 
-Nearby chokepoints displayed on an interactive map.
+## 🚀 Technical Stack
 
-Different marker colors for user location and chokepoints.
+### Frontend
+- **Framework:** React 18, Vite
+- **Routing:** Wouter
+- **Mapping:** React-Leaflet / Leaflet.js
+- **State Management:** TanStack Query, React Context
+- **Styling:** Tailwind CSS, Radix UI Primitives, Framer Motion
 
-Inline map UI inside checkout with optional full-page view.
+### Backend
+- **Server:** Node.js, Express 4
+- **Database:** MongoDB (Enroute Orders & Chokepoints) & In-Memory Store (Products)
+- **Schema & Validation:** Drizzle ORM, Zod
+- **Geolocation Math:** Geolib
 
-Slot Assignment & Load Balancing
+---
 
-Backend API assigns time slots.
+## 🚦 Getting Started
 
-Smart crowd load balancing with fallback chokepoints.
+### Prerequisites
 
-User gets one free reschedule option.
+- [Node.js](https://nodejs.org/) (v16+ recommended)
+- [MongoDB](https://www.mongodb.com/) account or local instance
 
-Checkout Integration
+### Installation
 
-Works seamlessly within the Walmart frontend clone.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/amoltrip28/Enroute_Delivery_System.git
+   cd Enroute_Delivery_System
+   ```
 
-Technical Stack
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-Frontend: React + TypeScript + Vite + TailwindCSS
+3. **Environment Setup:**
+   Create a `.env` file in the root directory and add your MongoDB URI:
+   ```env
+   MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/enroute?retryWrites=true&w=majority
+   ```
 
-Backend APIs: Node.js + Express
+4. **Run the Development Server:**
+   ```bash
+   npm run dev
+   ```
+   The application will be running at `http://localhost:5000`.
 
-Mapping: Leaflet.js + OpenStreetMap
+---
 
-Database: MongoDB
+## 💡 How It Works
 
-Deployment: Docker-based local setup
+1. **Shop & Checkout:** The customer browses products and proceeds to checkout.
+2. **Location Mapping:** The user enters their location, and the system assigns them to a delivery zone.
+3. **Chokepoint Discovery:** The interactive map displays optimal pickup points (chokepoints) in the zone with real-time traffic scores.
+4. **Slot Selection:** The customer selects a preferred chokepoint and time slot.
+5. **Smart Assignment:** The backend checks capacity and load balances before confirming the slot.
+6. **Confirmation:** The final chokepoint and pickup window are provided in the order confirmation.
 
-Impact (South Dallas Case Study)
+---
 
-Households: ~500,000
+## 🌍 Impact (South Dallas Case Study)
 
-Online Orders/Week: ~100,000
+Analyzing a use case with ~500,000 households and ~100,000 online orders/week:
 
-Avg. Order Value: $85
+- **Current Avg. Delivery Distance:** 5 miles
+- **Fuel Consumption:** 0.15 gallons/mile
 
-Avg. Delivery Distance: 5 miles
+**Key Savings with 10% EnRoute Adoption:**
+- **Miles Saved:** ~50,000 miles/week
+- **Fuel Saved:** ~7,500 gallons/week
+- **Cost Savings:** ~15% reduction in last-mile delivery cost
+- **Emissions Reduction:** ~67 metric tons CO₂/week
 
-Fuel Consumption: 0.15 gallons/mile
+---
 
-Key Savings with 10% EnRoute Adoption
+## 🏗 System Architecture
 
-Miles Saved: ~50,000 miles/week
+The project consists of a monorepo containing a React frontend and an Express backend, sharing TypeScript schemas.
 
-Fuel Saved: ~7,500 gallons/week
+```mermaid
+graph TD;
+    Client[Browser / React] -->|GET /api/products| MemDB[(In-Memory DB)];
+    Client -->|POST /api/orders| MemDB;
+    Client -->|GET /api/location/zone| Express[Express Server];
+    Client -->|GET /api/chokepoints/:zone| MongoDB[(MongoDB Atlas)];
+    Client -->|POST /api/order/enroute| MongoDB;
+```
 
-Cost Savings: ~15% reduction in last-mile delivery cost
+---
 
-Emissions Reduction: ~67 metric tons CO₂/week
+## 🔮 Future Enhancements
 
-How It Works
+- **Dynamic Route Optimization:** Live optimization for delivery vans stocking the chokepoints.
+- **ML-Based Demand Prediction:** Forecasting chokepoint capacity and congestion using historical data.
+- **Incentive Systems:** Gamification and rewards for customers who choose EnRoute delivery.
+- **Persistent Data:** Migrating product and traditional order storage from memory to a fully scalable database (PostgreSQL/MongoDB).
 
-Customer enters location during checkout.
+---
 
-System assigns delivery zone.
-
-Nearby chokepoints are displayed on the map.
-
-Customer selects preferred chokepoint.
-
-Backend assigns delivery slot considering load balancing.
-
-Confirmation screen shows final chokepoint + time slot.
-
-Future Enhancements
-
-Dynamic route optimization for delivery vans.
-
-ML-based demand prediction for chokepoint capacity.
-
-Incentive mechanism for customers choosing EnRoute delivery.
-
+*Built with ❤️ to optimize the future of delivery logistics.*

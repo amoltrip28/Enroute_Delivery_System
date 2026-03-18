@@ -20,7 +20,15 @@ const zones: Zone[] = [
       maxLng: -96.75
     }
   },
-  // You can add more zones here
+  {
+    name: "Bangalore",
+    bounds: {
+      minLat: 12.80,
+      maxLat: 13.20,
+      minLng: 77.40,
+      maxLng: 77.80
+    }
+  },
 ];
 
 export default zones;

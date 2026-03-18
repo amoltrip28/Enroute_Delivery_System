@@ -24,6 +24,26 @@ const data: IChokePoint[] = [
       { time: "5–6 PM", maxOrders: 8, currentOrders: 3 },
     ],
   },
+  {
+    zone: "Bangalore",
+    name: "Silk Board Junction",
+    coordinates: { lat: 12.9172, lng: 77.6227 },
+    trafficScore: 95,
+    availableTimeSlots: [
+      { time: "9–10 AM", maxOrders: 20, currentOrders: 15 },
+      { time: "6–7 PM", maxOrders: 20, currentOrders: 18 },
+    ],
+  },
+  {
+    zone: "Bangalore",
+    name: "Majestic Bus Station",
+    coordinates: { lat: 12.9767, lng: 77.5713 },
+    trafficScore: 85,
+    availableTimeSlots: [
+      { time: "10–11 AM", maxOrders: 15, currentOrders: 5 },
+      { time: "5–6 PM", maxOrders: 15, currentOrders: 8 },
+    ],
+  },
 ];
 
 async function seed(): Promise<void> {
